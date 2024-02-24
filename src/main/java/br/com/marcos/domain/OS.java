@@ -3,18 +3,40 @@ package br.com.marcos.domain;
 import java.time.LocalDate;
 import java.util.Objects;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import br.com.marcos.domain.enuns.Prioridade;
 import br.com.marcos.domain.enuns.Status;
 
+@Entity
 public class OS {
 
+	@Id
+	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private Integer id;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy Hh:mm")
 	private LocalDate dataAbertura;
+	
+	@JsonFormat(pattern = "dd/MM/yyyy Hh:mm")
 	private LocalDate dataFechamento;
 	private Integer prioridade;
 	private String observacao;
 	private Integer status;
+
+	@ManyToOne
+	@JoinColumn(name = "tecnico_id")
 	private Tecnico tecnico;
+	
+	@ManyToOne
+	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
 	public OS() {
