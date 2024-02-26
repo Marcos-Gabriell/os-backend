@@ -1,4 +1,4 @@
-package br.com.marcos.servcices;
+package br.com.marcos.services;
 
 import java.util.Arrays;
 
