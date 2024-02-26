@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 import br.com.marcos.servcices.DBService;
 
 @Configuration
-@Profile("test")
+@Profile("dev")
 public class DevConfig {
 
 
