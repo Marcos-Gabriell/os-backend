@@ -21,7 +21,7 @@ public class TecnicoController {
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id) {
 		Tecnico obj = service.findById(id);
-		TecnicoDTO objDTO = new TecnicoDTO();
+		TecnicoDTO objDTO = new TecnicoDTO(obj);
 		return ResponseEntity.ok().body(objDTO);
 	}
 }
