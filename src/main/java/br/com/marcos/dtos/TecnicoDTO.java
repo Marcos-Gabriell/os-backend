@@ -1,10 +1,13 @@
 package br.com.marcos.dtos;
 
+import java.io.Serializable;
+
 import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.marcos.domain.Tecnico;
 
-public class TecnicoDTO {
+public class TecnicoDTO implements Serializable{
+	private static final long serialVersionUID = 1L;
 
 	private Integer id;
 	private String nome;
@@ -57,6 +60,5 @@ public class TecnicoDTO {
 		this.telefone = telefone;
 	}
 
-	
-	
+
 }
