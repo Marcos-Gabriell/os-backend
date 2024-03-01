@@ -60,9 +60,8 @@ public class ClienteController {
 	}
 	
 	@DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> deleteCliente(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteCliente(@PathVariable Integer id) {
         service.delete(id);
-        String mensagem = "Cliente com ID " + id + " foi excluído com sucesso!";
-        return ResponseEntity.ok().body(mensagem);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -62,9 +62,8 @@ public class TecnicoController {
 	}
 	
 	@DeleteMapping(value = "/{id}")
-    public ResponseEntity<String> deleteTecnico(@PathVariable Integer id) {
+    public ResponseEntity<Void> deleteTecnico(@PathVariable Integer id) {
         service.delete(id);
-        String mensagem = "Técnico com ID " + id + " foi excluído com sucesso!";
-        return ResponseEntity.ok().body(mensagem);
+        return ResponseEntity.noContent().build();
     }
 }
