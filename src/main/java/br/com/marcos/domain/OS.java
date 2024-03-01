@@ -83,7 +83,7 @@ public class OS {
 	}
 
 	public Prioridade getPrioridade() {
-		return Prioridade.toEnun(this.prioridade);
+		return Prioridade.toEnum(this.prioridade);
 	}
 
 	public void setPrioridade(Prioridade prioridade) {
@@ -99,7 +99,7 @@ public class OS {
 	}
 
 	public Status getStatus() {
-		return Status.toEnun(this.status);
+		return Status.toEnum(this.status);
 	}
 
 	public void setStatus(Status status) {
