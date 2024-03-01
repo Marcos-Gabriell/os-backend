@@ -1,31 +1,40 @@
 package br.com.marcos.dtos;
 
+
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.marcos.domain.OS;
+import br.com.marcos.domain.enuns.Prioridade;
+import br.com.marcos.domain.enuns.Status;
+
 
 public class OSDTO implements Serializable {
-
 	private static final long serialVersionUID = 1L;
 
 	private Integer id;
-	
-	@JsonFormat(pattern = "dd/MM/yyyy Hh:mm")
-	private LocalDate dataAbertura;
-	
-	@JsonFormat(pattern = "dd/MM/yyyy Hh:mm")
-	private LocalDate dataFechamento;
+
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private LocalDateTime dataAbertura;
+
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private LocalDateTime dataFechamento;
+
 	private Integer prioridade;
-	private String observacao;
+	
+	@NotEmpty(message = "O campo OBSERVAÇÕES é requerido")
+	private String observacoes;
 	private Integer status;
 	private Integer tecnico;
 	private Integer cliente;
 
 	public OSDTO() {
 		super();
+
 	}
 
 	public OSDTO(OS obj) {
@@ -34,7 +43,7 @@ public class OSDTO implements Serializable {
 		this.dataAbertura = obj.getDataAbertura();
 		this.dataFechamento = obj.getDataFechamento();
 		this.prioridade = obj.getPrioridade().getCod();
-		this.observacao = obj.getObservacao();
+		this.observacoes = obj.getObservacoes();
 		this.status = obj.getStatus().getCod();
 		this.tecnico = obj.getTecnico().getId();
 		this.cliente = obj.getCliente().getId();
@@ -48,40 +57,40 @@ public class OSDTO implements Serializable {
 		this.id = id;
 	}
 
-	public LocalDate getDataAbertura() {
+	public LocalDateTime getDataAbertura() {
 		return dataAbertura;
 	}
 
-	public void setDataAbertura(LocalDate dataAbertura) {
+	public void setDataAbertura(LocalDateTime dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public LocalDate getDataFechamento() {
+	public LocalDateTime getDataFechamento() {
 		return dataFechamento;
 	}
 
-	public void setDataFechamento(LocalDate dataFechamento) {
+	public void setDataFechamento(LocalDateTime dataFechamento) {
 		this.dataFechamento = dataFechamento;
 	}
 
-	public Integer getPrioridade() {
-		return prioridade;
+	public Prioridade getPrioridade() {
+		return Prioridade.toEnun(this.prioridade);
 	}
 
 	public void setPrioridade(Integer prioridade) {
 		this.prioridade = prioridade;
 	}
 
-	public String getObservacao() {
-		return observacao;
+	public String getObservacoes() {
+		return observacoes;
 	}
 
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
 	}
 
-	public Integer getStatus() {
-		return status;
+	public Status getStatus() {
+		return Status.toEnun(this.status);
 	}
 
 	public void setStatus(Integer status) {

@@ -1,5 +1,6 @@
 package br.com.marcos.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +21,9 @@ public class OsService {
 		
 		return obj.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! id: " + id + "Tipo: " + OS.class.getName()));
+	}
+	
+	public List<OS> findAll() {
+		return repository.findAll();
 	}
 }

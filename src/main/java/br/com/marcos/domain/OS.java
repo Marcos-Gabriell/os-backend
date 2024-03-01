@@ -1,7 +1,7 @@
 package br.com.marcos.domain;
 
-import java.time.LocalDate;
-import java.util.Objects;
+
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,44 +15,44 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import br.com.marcos.domain.enuns.Prioridade;
 import br.com.marcos.domain.enuns.Status;
 
+
 @Entity
 public class OS {
 
 	@Id
-	@GeneratedValue(strategy =  GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
-	@JsonFormat(pattern = "dd/MM/yyyy Hh:mm")
-	private LocalDate dataAbertura;
-	
-	@JsonFormat(pattern = "dd/MM/yyyy Hh:mm")
-	private LocalDate dataFechamento;
+
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private LocalDateTime dataAbertura;
+
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private LocalDateTime dataFechamento;
 	private Integer prioridade;
-	private String observacao;
+	private String observacoes;
 	private Integer status;
 
 	@ManyToOne
 	@JoinColumn(name = "tecnico_id")
 	private Tecnico tecnico;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Cliente cliente;
 
 	public OS() {
 		super();
-		this.setDataAbertura(LocalDate.now());
+		this.setDataAbertura(LocalDateTime.now());
 		this.setPrioridade(Prioridade.BAIXA);
 		this.setStatus(Status.ABERTO);
 	}
 
-	public OS(Integer id, Prioridade prioridade, String observacao, 
-			Status status, Tecnico tecnico, Cliente cliente) {
+	public OS(Integer id, Prioridade prioridade, String observacoes, Status status, Tecnico tecnico, Cliente cliente) {
 		super();
 		this.id = id;
-		this.setDataAbertura(LocalDate.now());
+		this.setDataAbertura(LocalDateTime.now());
 		this.prioridade = (prioridade == null) ? 0 : prioridade.getCod();
-		this.observacao = observacao;
+		this.observacoes = observacoes;
 		this.status = (status == null) ? 0 : status.getCod();
 		this.tecnico = tecnico;
 		this.cliente = cliente;
@@ -66,19 +66,19 @@ public class OS {
 		this.id = id;
 	}
 
-	public LocalDate getDataAbertura() {
+	public LocalDateTime getDataAbertura() {
 		return dataAbertura;
 	}
 
-	public void setDataAbertura(LocalDate dataAbertura) {
+	public void setDataAbertura(LocalDateTime dataAbertura) {
 		this.dataAbertura = dataAbertura;
 	}
 
-	public LocalDate getDataFechamento() {
+	public LocalDateTime getDataFechamento() {
 		return dataFechamento;
 	}
 
-	public void setDataFechamento(LocalDate dataFechamento) {
+	public void setDataFechamento(LocalDateTime dataFechamento) {
 		this.dataFechamento = dataFechamento;
 	}
 
@@ -90,12 +90,12 @@ public class OS {
 		this.prioridade = prioridade.getCod();
 	}
 
-	public String getObservacao() {
-		return observacao;
+	public String getObservacoes() {
+		return observacoes;
 	}
 
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
+	public void setObservacoes(String observacoes) {
+		this.observacoes = observacoes;
 	}
 
 	public Status getStatus() {
@@ -124,7 +124,10 @@ public class OS {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id);
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
 	}
 
 	@Override
@@ -136,7 +139,12 @@ public class OS {
 		if (getClass() != obj.getClass())
 			return false;
 		OS other = (OS) obj;
-		return Objects.equals(id, other.id);
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		return true;
 	}
 
 }
