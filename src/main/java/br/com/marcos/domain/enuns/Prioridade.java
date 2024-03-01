@@ -1,5 +1,7 @@
 package br.com.marcos.domain.enuns;
 
+
+
 public enum Prioridade {
 
 	BAIXA(0, "BAIXA"), MEDIA(1, "MEDIA"), ALTA(2, "ALTA");
@@ -20,16 +22,18 @@ public enum Prioridade {
 		return descricao;
 	}
 
-	public static Prioridade toEnun(Integer cod) {
+	public static Prioridade toEnum(Integer cod) {
+
 		if (cod == null) {
 			return null;
 		}
-		
+
 		for (Prioridade x : Prioridade.values()) {
-			if(cod.equals(x.getCod())) {
+			if (cod.equals(x.getCod())) {
 				return x;
 			}
 		}
-		throw new IllegalArgumentException("Prioridade inválida! " + cod);
+
+		throw new IllegalArgumentException("Prioridade inválida!" + cod);
 	}
 }

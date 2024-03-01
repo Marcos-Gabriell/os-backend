@@ -1,8 +1,9 @@
 package br.com.marcos.domain.enuns;
 
-public enum Status {
 
-	ABERTO(0, "ABERTO"), ADAMENTO(1, "ADAMENTO"), ENCERRADO(2, "ENCERRADO");
+public enum Status {
+	
+	ABERTO(0, "ABERTO"), ANDAMENTO(1, "ANDAMENTO"), ENCERRADO(2, "ENCERRADO");
 
 	private Integer cod;
 	private String descricao;
@@ -20,7 +21,8 @@ public enum Status {
 		return descricao;
 	}
 
-	public static Status toEnun(Integer cod) {
+	public static Status toEnum(Integer cod) {
+
 		if (cod == null) {
 			return null;
 		}
@@ -30,6 +32,7 @@ public enum Status {
 				return x;
 			}
 		}
-		throw new IllegalArgumentException("Prioridade inválida! " + cod);
+
+		throw new IllegalArgumentException("Status inválido!" + cod);
 	}
 }

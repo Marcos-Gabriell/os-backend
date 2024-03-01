@@ -30,7 +30,11 @@ public class OSDTO implements Serializable {
 	@NotEmpty(message = "O campo OBSERVAÇÕES é requerido")
 	private String observacoes;
 	private Integer status;
+	
+	@NotEmpty(message = "O campo TÉCNICO é requerido")
 	private Integer tecnico;
+	
+	@NotEmpty(message = "O campo CLIENTE é requerido")
 	private Integer cliente;
 
 	public OSDTO() {
@@ -75,7 +79,7 @@ public class OSDTO implements Serializable {
 	}
 
 	public Prioridade getPrioridade() {
-		return Prioridade.toEnun(this.prioridade);
+		return Prioridade.toEnum(this.prioridade);
 	}
 
 	public void setPrioridade(Integer prioridade) {
@@ -91,7 +95,7 @@ public class OSDTO implements Serializable {
 	}
 
 	public Status getStatus() {
-		return Status.toEnun(this.status);
+		return Status.toEnum(this.status);
 	}
 
 	public void setStatus(Integer status) {
