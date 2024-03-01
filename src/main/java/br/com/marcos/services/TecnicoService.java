@@ -3,6 +3,8 @@ package br.com.marcos.services;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +35,12 @@ public class TecnicoService {
 			throw new DataIntegratyViolationExeception("CPF já cadastrado na base de dados!");
 		}
 		return repository.save(new Tecnico(null, objDTO.getNome(), objDTO.getCpf(), objDTO.getTelefone()));
+	}
+	
+	public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
+		Tecnico oldObj = findById(id);
+		
+		
 	}
 	
 	private Tecnico findByCPF(TecnicoDTO objDTO) {
