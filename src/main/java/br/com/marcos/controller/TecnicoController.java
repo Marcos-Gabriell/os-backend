@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -59,4 +60,11 @@ public class TecnicoController {
 		TecnicoDTO newObj = new TecnicoDTO(service.update(id, objDTO));
 		return ResponseEntity.ok().body(newObj);
 	}
+	
+	@DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> deleteTecnico(@PathVariable Integer id) {
+        service.delete(id);
+        String mensagem = "Técnico com ID " + id + " foi excluído com sucesso!";
+        return ResponseEntity.ok().body(mensagem);
+    }
 }

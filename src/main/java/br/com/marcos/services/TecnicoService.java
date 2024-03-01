@@ -31,28 +31,37 @@ public class TecnicoService {
 	}
 
 	public Tecnico create(TecnicoDTO objDTO) {
-		if(findByCPF(objDTO) != null) {
+		if (findByCPF(objDTO) != null) {
 			throw new DataIntegratyViolationExeception("CPF já cadastrado na base de dados!");
 		}
 		return repository.save(new Tecnico(null, objDTO.getNome(), objDTO.getCpf(), objDTO.getTelefone()));
 	}
-	
+
 	public Tecnico update(Integer id, @Valid TecnicoDTO objDTO) {
 		Tecnico oldObj = findById(id);
-		
-		if(findByCPF(objDTO) != null && findByCPF(objDTO).getId() != id)  {
+
+		if (findByCPF(objDTO) != null && findByCPF(objDTO).getId() != id) {
 			throw new DataIntegratyViolationExeception("CPF já cadastrado na base de dados!");
 		}
-		
+
 		oldObj.setNome(objDTO.getNome());
 		oldObj.setCpf(objDTO.getCpf());
 		oldObj.setTelefone(objDTO.getTelefone());
 		return repository.save(oldObj);
 	}
-	
+
+	public void delete(Integer id) {
+		Tecnico obj = findById(id);
+		if(obj.getList().size() > 0) {
+			throw new DataIntegratyViolationExeception("Técnico possui ordens de serviço, não pode ser deletado!");
+		}
+		 String mensagem = "Técnico com ID " + id + " foi excluído com sucesso!";
+		repository.deleteById(id);
+	}
+
 	private Tecnico findByCPF(TecnicoDTO objDTO) {
 		Tecnico obj = repository.findById(objDTO.getCpf());
-		if(obj != null) {
+		if (obj != null) {
 			return obj;
 		}
 		return null;
