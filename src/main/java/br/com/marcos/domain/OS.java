@@ -15,7 +15,6 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import br.com.marcos.domain.enuns.Prioridade;
 import br.com.marcos.domain.enuns.Status;
 
-
 @Entity
 public class OS {
 
