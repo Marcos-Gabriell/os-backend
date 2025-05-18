@@ -38,7 +38,7 @@ Para executar o projeto OS-API em sua máquina local, siga os passos abaixo:
    - MySQL Server instalado e configurado.
 
 2. **Clonar o Repositório**:
-    - git clone https://github.com/seu_usuario/os-api.git
+    - git clone https://github.com/Marcos-Gabriell/os-backend
   
   
 3. **Configuração do Banco de Dados**:
